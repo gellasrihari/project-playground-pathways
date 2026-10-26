@@ -57,8 +57,8 @@ const QUIZ = [
 
 function Lab() {
   const [student, setStudent] = useState({ name: "", reg: "" });
-  const [smiles, setSmiles] = useState(EXAMPLES[0].smiles);
-  const [input, setInput] = useState(EXAMPLES[0].smiles);
+  const [smiles, setSmiles] = useState(EXAMPLES[0]!.smiles);
+  const [input, setInput] = useState(EXAMPLES[0]!.smiles);
   const [props, setProps] = useState<Props | null>(null);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
