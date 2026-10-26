@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export type Style3D = "stick" | "sphere" | "line" | "ballstick";
 
-export function Mol3D({ cid, style }: { cid: number | null; style: Style3D }) {
+export function Mol3D({ cid, style, dark = false }: { cid: number | null; style: Style3D; dark?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [msg, setMsg] = useState("");
   useEffect(() => {
@@ -19,7 +19,7 @@ export function Mol3D({ cid, style }: { cid: number | null; style: Style3D }) {
         const $3Dmol: any = await import("3dmol");
         if (cancelled || !ref.current) return;
         ref.current.innerHTML = "";
-        const viewer = $3Dmol.createViewer(ref.current, { backgroundColor: "white" });
+        const viewer = $3Dmol.createViewer(ref.current, { backgroundColor: dark ? "#1b2730" : "white" });
         viewer.addModel(sdf, "sdf");
         const s =
           style === "sphere" ? { sphere: {} }
@@ -36,7 +36,7 @@ export function Mol3D({ cid, style }: { cid: number | null; style: Style3D }) {
       }
     })();
     return () => { cancelled = true; };
-  }, [cid, style]);
+  }, [cid, style, dark]);
   return (
     <div className="relative h-80 w-full">
       <div ref={ref} className="absolute inset-0" />
